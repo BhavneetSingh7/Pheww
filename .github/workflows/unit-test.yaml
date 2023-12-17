@@ -1,4 +1,4 @@
-name: Lint code
+name: Test
 run-name: ${{ github.actor }} is learning GitHub Actions
 
 on:
@@ -7,7 +7,7 @@ on:
       - master
       - integration
 jobs:
-  lint-code:
+  run-tests:
     runs-on: ubuntu-latest
 
     steps:
@@ -16,5 +16,7 @@ jobs:
         with:
           python-version: '3.8'
           cache: 'pip'
-      - run: pip install flake8
+      - run: pip install poetry
+      - run: poetry install
       - run: flake8
+      - run: poetry run pytest
