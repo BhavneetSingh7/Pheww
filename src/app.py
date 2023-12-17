@@ -4,5 +4,7 @@ app = Flask(__name__)
 
 
 @app.route("/", methods=["GET", "OPTIONS"])
-def main():
+def main(event, context):
+    print(event)
+    print(context)
     return "Interface"
