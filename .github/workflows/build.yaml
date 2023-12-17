@@ -1,0 +1,21 @@
+name: Build
+run-name: ${{ github.actor }} is learning GitHub Actions
+
+on:
+  pull_request:
+    branches:    
+      - master
+      - integration
+jobs:
+  build-lambda:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.8'
+          cache: 'pip'
+      - run: pip install poetry
+      - run: chmod u+x ./ci-scripts/build-lambda.sh
+      - run: ./ci-scripts/build-lambda.sh
